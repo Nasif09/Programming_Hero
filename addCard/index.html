@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <section>
+        <div class="container">
+            <div class="cart">
+                <div class="col-md-12 col-lg-10 mx-auto">
+                    <div class="cart-item">
+                        <div class="row">
+                            <div class="imgsize col-md-7 center-item">
+                                <img src="image/iPhone-14.jpg" alt="iPhone-14.jpg"  class="rounded float-left">
+                                <h5 class="d-inline">iPhone-14 128GB Balck</h5>
+                            </div>
+                            <div class="col-md-5 center-item">
+                                <div class="input-group number-spinner">
+                                    <button onclick="handleProductChange('model-14', false)" class="btn btn-default"><i class="fa-solid fa-minus"></i></button>
+                                    <input id="model-14-count" type="text" class="form-control text-center" value="1">
+                                    <button onclick="handleProductChange('model-14',true)" class="btn btn-default"><i class="fa-solid fa-plus"></i></button>
+                                </div>
+                            </div>
+                            <h5 id="model-14-total">$1200</h5>
+                            <!-- <img src="image/remove.png" alt="remove"> -->
+    
+                            <div class="imgsize center-item  col-md-7 center-item">
+                                <img src="image/iPhone-15.jpg" alt="iPhone-15.jpg" class="rounded float-left">
+                                <h5 class="d-inline">iPhone-15 128GB Balck</h5>
+                            </div>
+                            <div class="col-md-5 center-item">
+                                <div class="input-group number-spinner">
+                                    <button onclick="handleProductChange('model-15', false)" class="btn btn-default"><i class="fa-solid fa-minus"></i></button>
+                                    <input id="model-15-count" type="text" class="form-control text-center" value="1">
+                                    <button onclick="handleProductChange('model-15', true)" class="btn btn-default"><i class="fa-solid fa-plus"></i></button>
+                                </div>
+                            </div>
+                            <h5 id="model-15-total">$1800</h5>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cart-item">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h5>Subtotal:</h5>
+                            <h5>Tax</h5>
+                            <h5>Total</h5>
+                        </div>
+                        <div class="col-md-4 status">
+                            <h5 id="total-price">$00</h5>
+                            <h5 id="tax-amount">$00</h5>
+                            <h5 id="grand-total">$00</h5>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <script>
+        function handleProductChange(product, isIncrease){
+            const productInput = document.getElementById(product+'-count');
+            const productCount = parseInt(productInput.value);
+            let productNewCount = productCount;
+            if(isIncrease == true){
+                productNewCount = productCount + 1;
+            }if(isIncrease== false & productNewCount>0){
+                productNewCount = productCount - 1;
+            }
+            productInput.value = productNewCount;
+            let productTotal = 0;
+            if(product == 'model-14'){
+                productTotal = productNewCount * 1200;
+            }
+            if(product == 'model-15'){
+                productTotal = productNewCount * 1800;
+            }
+            document.getElementById(product+'-total').innerText = '$' + productTotal;
+            calculateTotal();
+        }
+        function calculateTotal(){
+            const model_14_count = getInputValue('model-14');
+            const model_15_count = getInputValue('model-15');
+
+            const totalPrice = model_14_count * 1200 + model_15_count * 1800;
+            document.getElementById('total-price').innerText = '$'+totalPrice;
+
+            const tax = (totalPrice * 0.1);
+            document.getElementById('tax-amount').innerText = '$'+tax;
+
+            const grandTotal = totalPrice + tax;
+            document.getElementById('grand-total').innerText = '$'+grandTotal;
+
+        }
+        function getInputValue(product){
+            const productInput = document.getElementById(product+'-count');
+            const productCount = parseInt(productInput.value);
+            return productCount;
+        }
+    </script>
+</body>
+</html>

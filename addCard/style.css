@@ -1,0 +1,14 @@
+img {
+    width: 100px;
+    height: 100px;
+}
+
+.center-item {
+    margin-top: 20px;
+    padding: 10px;
+    box-shadow: 5px 5px 10px gray;
+}
+
+.center-item h5 {
+    margin-left: 35px;
+}
